@@ -53,6 +53,10 @@
             "MUTED": "```The group chat has been Closed!```",
             "UNMUTE_DESC": "Open the group chat. Anyone can send a message.",
             "UNMUTED": "```The group chat has opened!```",
+            "UNMUTED_MINS": "```The group chat has been opened for {} minutes```",
+            "MUTED_MINS": "```The group chat has been closed for {} minutes```",
+            "MUTED_AFTER_MINS": "```The group chat has been closed back after {} minutes```",
+            "UNMUTED_AFTER_MINS": "```The group chat has been opened back after {} minutes```",
             "INVITE_DESC": "Provides the group's invitation link.",
             "INVITE": "```Group Link: ```"
         },
