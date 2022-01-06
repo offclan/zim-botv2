@@ -53,6 +53,10 @@
             "MUTED": "```Obrolan grup dibisukan!```",
             "UNMUTE_DESC": "Suarakan obrolan grup. Siapapun bisa mengirim pesan.",
             "UNMUTED": "```Obrolan grup telah disuarakan!```",
+            "UNMUTED_MINS": "```Obrolan grup telah dibuka selama {} menit```",
+            "MUTED_MINS": "```Obrolan grup telah ditutup selama {} menit```",
+            "MUTED_AFTER_MINS": "```Obrolan grup telah ditutup kembali setelah {} menit```",
+            "UNMUTED_AFTER_MINS": "```Obrolan grup telah dibuka kembali setelah {} menit```",
             "INVITE_DESC": "Memberikan tautan undangan grup.",
             "INVITE": "```Tautan undangan:```"
         },
