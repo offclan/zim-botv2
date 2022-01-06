@@ -198,11 +198,11 @@ WhatsAlexa.addCommand({pattern: 'closegc ?(.*)', fromMe: td, onlyGroup: true, de
         await message.client.sendReply(Lang.MUTED);
     }
     else {
-        await message.client.sendReply(Lang.MUTED_MINS);
+        await message.client.sendReply(Lang.MUTED_MINS.replace('{}', match[1]));
         await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, true);
         await new Promise((r) => setTimeout(r, match[1] * 60000))
         await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, false);
-        await message.sendReply(Lang.UNMUTED_AFTER_MINS);
+        await message.sendReply(Lang.UNMUTED_AFTER_MINS.replace('{}', match[1]));
     }
 }));
 
@@ -216,11 +216,11 @@ WhatsAlexa.addCommand({pattern: 'opengc ?(.*)', fromMe: td, onlyGroup: true, des
         await message.client.sendMessage(message.jid,Lang.UNMUTED,MessageType.text);
     }
     else {
-        await message.client.sendMessage(message.jid,Lang.UNMUTED_MINS,MessageType.text);
+        await message.sendReply(Lang.UNMUTED_MINS.replace('{}', match[1]));
         await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, false);
         await new Promise((r) => setTimeout(r, match[1] * 60000))
         await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, true);
-        await message.client.sendMessage(message.jid,Lang.MUTED_AFTER_MINS,MessageType.text);
+        await message.sendReply(Lang.MUTED_AFTER_MINS.replace('{}', match[1]));
     }
 }));
 
