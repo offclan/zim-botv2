@@ -290,7 +290,7 @@ async function Alexa () {
         await WhatsAlexa.connect();
     } catch {
         if (!nodb) {
-            console.log(chalk.red.bold('🔴 ERROR... TRYING AGAIN...'))
+            console.log(chalk.red.bold('🔴 ERROR.. TRYING AGAIN...'))
             WhatsAlexa.loadAuthInfo(Session.deCrypt(config.SESSION)); 
             try {
                 await WhatsAlexa.connect();
