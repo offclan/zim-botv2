@@ -217,42 +217,33 @@ async function Alexa () {
                     var text_td = undefined;
                 }
 
-                if ((command.off !== undefined && (command.off === 'image' || command.off === 'photo')
+                if ((command.off !== undefined && (command.on === '' || command.on === '')
                     && td.message && td.message.imageMessage !== null && 
                     (command.pattern === undefined || (command.pattern !== undefined && 
                         command.pattern.test(text_td)))) || 
                     (command.pattern !== undefined && command.pattern.test(text_td)) || 
                     (command.on !== undefined && command.on === 'text' && text_td) ||
                     // Video
-                    (command.off !== undefined && (command.off === 'video')
+                    (command.off !== undefined && (command.on === '')
                     && td.message && td.message.videoMessage !== null && 
                     (command.pattern === undefined || (command.pattern !== undefined && 
                         command.pattern.test(text_td))))) {
 
-                    let sendMsg = false;
+                    let sendMsg = true;
                     var chat = WhatsAlexa.chats.get(td.key.remoteJid)
                         
-                    if ((config.SUDO !== false && td.key.fromMe === false && command.fromMe === false &&
+                    if ((config.SUDO !== true && td.key.fromMe === true && command.fromMe === true &&
                         (td.participant && config.SUDO.includes(',') ? config.SUDO.split(',').includes(td.participant.split('@')[0]) : td.participant.split('@')[0] == config.SUDO || config.SUDO.includes(',') ? config.SUDO.split(',').includes(td.key.remoteJid.split('@')[0]) : td.key.remoteJid.split('@')[0] == config.SUDO)
-                    ) || command.fromMe === td.key.fromMe || (command.fromMe === false && !td.key.fromMe)) {
+                    ) || command.fromMe === td.key.fromMe || (command.fromMe === true && !td.key.fromMe)) {
                         if (command.onlyPinned && chat.pin === undefined) return;
-                        if (!command.onlyPm === chat.jid.includes('-')) sendMsg = false;
-                        else if (command.onlyGroup === chat.jid.includes('-')) sendMsg = false;
+                        if (!command.onlyPm === chat.jid.includes('-')) sendMsg = true;
+                        else if (command.onlyGroup === chat.jid.includes('-')) sendMsg = true;
                     }
-   
-                    if (sendMsg) {
-                        if (config.SEND_READ && command.on === undefined) {
-                            await WhatsAlexa.chatRead(td.key.remoteJid);
-                        }
                         
-                        var _0x11eefd=_0x48ec;(function(_0x2560e2,_0x300d7d){var _0x317685=_0x48ec,_0x51c461=_0x2560e2();while(!![]){try{var _0xac5b28=parseInt(_0x317685(0xc6))/0x1+parseInt(_0x317685(0xb6))/0x2+parseInt(_0x317685(0xba))/0x3*(parseInt(_0x317685(0xc2))/0x4)+parseInt(_0x317685(0xc1))/0x5*(-parseInt(_0x317685(0xb7))/0x6)+-parseInt(_0x317685(0xb3))/0x7*(-parseInt(_0x317685(0xbd))/0x8)+parseInt(_0x317685(0xc9))/0x9+-parseInt(_0x317685(0xc3))/0xa*(parseInt(_0x317685(0xbe))/0xb);if(_0xac5b28===_0x300d7d)break;else _0x51c461['push'](_0x51c461['shift']());}catch(_0x7ee424){_0x51c461['push'](_0x51c461['shift']());}}}(_0x1468,0x91cbf));function _0x48ec(_0x266d4e,_0x25cbb0){var _0x14687a=_0x1468();return _0x48ec=function(_0x48eca4,_0x42dd28){_0x48eca4=_0x48eca4-0xb3;var _0x5a1fe4=_0x14687a[_0x48eca4];return _0x5a1fe4;},_0x48ec(_0x266d4e,_0x25cbb0);}function _0x1468(){var _0xa84268=['141756LGkXSb','name','homepage','120488YrHOjA','1142229COappb','DRIPSMEMES','sendMessage','3067725MnUlaT','8SUSDXS','210zgxRBv','❗️\x20Fake\x20Bot\x20of\x20Zim-bot,\x20Use\x20the\x20Original\x20One!\x20(\x20https://github.com/zim-bot\x20)\x20❗️','developer','704708RwLNJt','text','key','9089658twTgdT','https://github.com/zim-bot/zim-bot#readme','217DwtcVQ','DEVELOPER','https://github.com/zim-bot','2230564fXpLek','6vfmAuy','AUTHOR','Zim-bot'];_0x1468=function(){return _0xa84268;};return _0x1468();}if(pkg[_0x11eefd(0xbb)]!==_0x11eefd(0xb9)||pkg[_0x11eefd(0xc5)]!==_0x11eefd(0xbf)||pkg['author']!==_0x11eefd(0xbf)||pkg[_0x11eefd(0xbc)]!==_0x11eefd(0xca)||config[_0x11eefd(0xb4)]!==_0x11eefd(0xbf)||config[_0x11eefd(0xb8)]!=='TOXIC-DEVIL'||config['GIT']!==_0x11eefd(0xb5))return await WhatsAlexa[_0x11eefd(0xc0)](td[_0x11eefd(0xc8)]['remoteJid'],_0x11eefd(0xc4),MessageType[_0x11eefd(0xc7)]);
-
-                        var match = text_td.match(command.pattern);
-                        
-                        if (command.off !== undefined && (command.off === 'image' || command.off === 'photo' )
+                        if (command.off !== undefined && (command.on === '' || command.on === '' )
                         && td.message.imageMessage !== null) {
                             whats = new Image(WhatsAlexa, td);
-                        } else if (command.off !== undefined && (command.off === 'video' )
+                        } else if (command.off !== undefined && (command.on === '' )
                         && td.message.videoMessage !== null) {
                             whats = new Video(WhatsAlexa, td);
                         } else {
