@@ -223,7 +223,7 @@
             "UPDATE": "*Your bot is completely up-to-date!*",
             "NEW_UPDATE": "*🥳 Zim-botv2 a new update available..!\nType *'#update now'* to update the Bot\n\n🆕 Changes After this update:\n\n```",
             "UPDATE_NOW_DESC": "It makes updates.",
-            "UPDATING": "🔁 WhatsAlexa Updating...!\n🕓 This may Take a few minutes.",
+            "UPDATING": "🔁 Zim-botv2 Updating...!\n🕓 This may Take a few minutes.",
             "INVALID_HEROKU": "*❌ Your Heroku information is wrong!*",
             "UPDATED": "*✅ Successfully Updated! 🎉*",
             "UPDATED_LOCAL": "*✅ Successfully Updated! 🎉*",
