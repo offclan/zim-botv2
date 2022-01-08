@@ -189,7 +189,7 @@ async function Alexa () {
                 await WhatsAlexa.sendMessage(td.key.remoteJid, fs.readFileSync("./src/video-&-gif/WhatsAlexa.mp4"), MessageType.video, { mimetype: Mimetype.gif, caption: gb.message.replace('{mention}', '@' + td.messageStubParameters[0].split('@')[0]).replace('{alexagif}', '').replace('{gcname}', json.subject).replace('{gcowner}', json.owner).replace('{gcdesc}', json.desc).replace('{owner}', WhatsAlexa.user.name) });
             } else if (gb.message.includes('{alexalogo}')) {
                 var json = await WhatsAlexa.groupMetadata(td.key.remoteJid)
-                await WhatsAlexa.sendMessage(td.key.remoteJid, fs.readFileSync("./src/image/WhatsAlexa.png"), MessageType.image, { mimetype: Mimetype.png, caption: gb.message.replace('{mention}', '@' + td.messageStubParameters[0].split('@')[0]).replace('{alexalogo}', '').replace('{gcname}', json.subject).replace('{gcowner}', json.owner).replace('{gcdesc}', json.desc).replace('{owner}', WhatsAlexa.user.name) });
+                await WhatsAlexa.sendMessage(td.key.remoteJid, fs.readFileSync("./src/image/zim.jpeg"), MessageType.image, { mimetype: Mimetype.png, caption: gb.message.replace('{mention}', '@' + td.messageStubParameters[0].split('@')[0]).replace('{alexalogo}', '').replace('{gcname}', json.subject).replace('{gcowner}', json.owner).replace('{gcdesc}', json.desc).replace('{owner}', WhatsAlexa.user.name) });
             } else {
                 let pp 
                 try { pp = await WhatsAlexa.getProfilePicture(td.messageStubParameters[0]); } catch { pp = await WhatsAlexa.getProfilePicture(); }
@@ -217,14 +217,14 @@ async function Alexa () {
                     var text_td = undefined;
                 }
 
-                if ((command.on !== undefined && (command.on === 'image' || command.on === 'photo')
+                if ((command.off !== undefined && (command.off === 'image' || command.off === 'photo')
                     && td.message && td.message.imageMessage !== null && 
                     (command.pattern === undefined || (command.pattern !== undefined && 
                         command.pattern.test(text_td)))) || 
                     (command.pattern !== undefined && command.pattern.test(text_td)) || 
                     (command.on !== undefined && command.on === 'text' && text_td) ||
                     // Video
-                    (command.on !== undefined && (command.on === 'video')
+                    (command.off !== undefined && (command.off === 'video')
                     && td.message && td.message.videoMessage !== null && 
                     (command.pattern === undefined || (command.pattern !== undefined && 
                         command.pattern.test(text_td))))) {
@@ -232,12 +232,12 @@ async function Alexa () {
                     let sendMsg = false;
                     var chat = WhatsAlexa.chats.get(td.key.remoteJid)
                         
-                    if ((config.SUDO !== false && td.key.fromMe === false && command.fromMe === true &&
+                    if ((config.SUDO !== false && td.key.fromMe === false && command.fromMe === false &&
                         (td.participant && config.SUDO.includes(',') ? config.SUDO.split(',').includes(td.participant.split('@')[0]) : td.participant.split('@')[0] == config.SUDO || config.SUDO.includes(',') ? config.SUDO.split(',').includes(td.key.remoteJid.split('@')[0]) : td.key.remoteJid.split('@')[0] == config.SUDO)
                     ) || command.fromMe === td.key.fromMe || (command.fromMe === false && !td.key.fromMe)) {
                         if (command.onlyPinned && chat.pin === undefined) return;
-                        if (!command.onlyPm === chat.jid.includes('-')) sendMsg = true;
-                        else if (command.onlyGroup === chat.jid.includes('-')) sendMsg = true;
+                        if (!command.onlyPm === chat.jid.includes('-')) sendMsg = false;
+                        else if (command.onlyGroup === chat.jid.includes('-')) sendMsg = false;
                     }
    
                     if (sendMsg) {
@@ -249,17 +249,17 @@ async function Alexa () {
 
                         var match = text_td.match(command.pattern);
                         
-                        if (command.on !== undefined && (command.on === 'image' || command.on === 'photo' )
+                        if (command.off !== undefined && (command.off === 'image' || command.off === 'photo' )
                         && td.message.imageMessage !== null) {
                             whats = new Image(WhatsAlexa, td);
-                        } else if (command.on !== undefined && (command.on === 'video' )
+                        } else if (command.off !== undefined && (command.off === 'video' )
                         && td.message.videoMessage !== null) {
                             whats = new Video(WhatsAlexa, td);
                         } else {
                             whats = new Message(WhatsAlexa, td);
                         }
                       
-                        if (config.PVTDELMSG == 'true' && command.deleteCommand && td.key.fromMe) {
+                        if (config.PVTDELMSG == 'false' && command.deleteCommand && td.key.fromMe) {
                             await whats.delete();
                         }
                         
